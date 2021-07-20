@@ -1,0 +1,21 @@
+body {
+    background-color: #2B2B2B;
+    color: #5D56E2;
+    font-weight: 500;
+    font-size: 1.05em;
+    font-family: "Microsoft JhengHei UI", "Microsoft YaHei UI", "Franklin Gothic Heavy", Arial, sans-serif;
+}
+
+a {
+    color: rgba(255, 255, 255, 0.6);
+    outline: none;
+    text-decoration: none;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+}
+
+a:hover, a:focus {
+    color: #74777b;
+    text-decoration: none;
+}
+
