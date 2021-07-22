@@ -10,6 +10,7 @@
     <groupId>com.maccura</groupId>
     <artifactId>restFul-ply</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>restFul-ply</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -37,6 +38,18 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <mainClass>com.maccura.RestFulPlyApplication</mainClass>
+                    <layout>JAR</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <resources>
@@ -49,6 +62,9 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
             </resource>
         </resources>
     </build>

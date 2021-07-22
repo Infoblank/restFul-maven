@@ -1,7 +1,7 @@
 package com.maccura;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
@@ -41,13 +42,14 @@ class RestFulPlyApplicationTests {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
- // 组合 产品  getGlobalDescribe
+    // 组合 产品  getGlobalDescribe
     private MockMvc mockMvc;
 
-    @BeforeEach
+    //@BeforeEach
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         System.out.println("<------>");
+        System.out.println(-30 / 7);
     }
 
     /**
@@ -56,7 +58,7 @@ class RestFulPlyApplicationTests {
      *                   Timeout 超时时间
      */
     @RepeatedTest(3)
-    @Timeout(value = 1000, unit = TimeUnit.MICROSECONDS)
+    @Timeout(value = 10, unit = TimeUnit.MICROSECONDS)
     void contextLoads() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/restFul/ply/add/ztt").accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -64,4 +66,10 @@ class RestFulPlyApplicationTests {
                 .andReturn();
     }
 
+    @Test
+    void contextLoadsLocalDateTime() {
+
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println(localDateTime);
+    }
 }
