@@ -2,9 +2,11 @@ package com.maccura;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.util.FileCopyUtils;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -41,11 +43,20 @@ public class TestClass {
     void file() throws IOException {
       //  File file = new File("src/main/resources/static/images/");
       //  File file1 = ResourceUtils.getFile("classpath:static/images/");
-        ClassPathResource classPathResource = new ClassPathResource("static/images/");
+        /*ClassPathResource classPathResource = new ClassPathResource("static/images/");
         File[] files = classPathResource.getFile().listFiles(pathname -> pathname.getAbsolutePath().endsWith(".png"));
         ArrayList<String> strings = new ArrayList<>();
         Arrays.stream(files).filter(s -> s.getAbsolutePath().endsWith(".png")).forEach(s->strings.add(s.getAbsolutePath().split("static")[1].replace("\\","/")));
-        System.out.println(strings);
+        System.out.println(strings);*/
+
+        Resource resource = new ClassPathResource("static/images/");
+        byte[] bytes = FileCopyUtils.copyToByteArray(resource.getInputStream());
+        String content = new String(bytes, StandardCharsets.UTF_8);
+        String[] split = content.split("\\n");
+        ArrayList<String> list = new ArrayList<>(split.length);
+        long count = Arrays.stream(split).filter(s -> list.add("images/" + s)).count();
+        list.forEach(System.out::println);
+
         /*File[] files = file1.listFiles(pathname -> pathname.getAbsolutePath().endsWith(".png"));
         assert files != null;
       //  Arrays.stream(files).forEach(s-> System.out.println(s.getPath()));

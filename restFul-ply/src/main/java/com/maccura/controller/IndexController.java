@@ -6,8 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-
 /**
  * @author 7097
  */
@@ -23,8 +21,10 @@ public class IndexController {
 
     @GetMapping("to3DRotatingAlbum.html")
     public String to3dRotatingAlbum(Model model) {
-        ArrayList<String> imagePath = ImageUtil.loadImagePath();
+        String[] imagePath = ImageUtil.loadImagePath();
         model.addAttribute("images",imagePath);
         return "/page/3DRotatingAlbum";
     }
+
+
 }

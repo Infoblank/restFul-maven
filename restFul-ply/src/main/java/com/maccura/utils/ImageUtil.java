@@ -1,28 +1,32 @@
 package com.maccura.utils;
 
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.util.FileCopyUtils;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author 7097
  */
 public class ImageUtil {
 
-    public static ArrayList<String> loadImagePath() {
-        ClassPathResource classPathResource = new ClassPathResource("static/images/");
-        File[] files = new File[0];
+    public static String[] loadImagePath() {
+        Resource resource = new ClassPathResource("static/images/");
+        byte[] bytes = new byte[0];
         try {
-            files = classPathResource.getFile().listFiles(pathname -> pathname.getAbsolutePath().endsWith(".png"));
+            bytes = FileCopyUtils.copyToByteArray(resource.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assert files != null;
-        ArrayList<String> images = new ArrayList<>();
-        Arrays.stream(files).filter(s -> s.getAbsolutePath().endsWith(".png")).forEach(s -> images.add(s.getAbsolutePath().split("static")[1].replace("\\", "/")));
-        return images;
+        String content = new String(bytes, StandardCharsets.UTF_8);
+        String[] split = content.split("\\n");
+        StringBuilder images = null;
+        for (int i = 0; i < split.length; i++) {
+            images = new StringBuilder("/images/");
+            split[i] = images.append(split[i]).toString();
+        }
+        return split;
     }
 }
