@@ -23,7 +23,7 @@ public class IndexController {
     public String to3dRotatingAlbum(Model model) {
         String[] imagePath = ImageUtil.loadImagePath();
         model.addAttribute("images",imagePath);
-        return "/page/3DRotatingAlbum";
+        return "page/3DRotatingAlbum";
     }
 
 
