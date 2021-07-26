@@ -77,10 +77,10 @@ public class ResultData<T> {
         return resultData;
     }
 
-    private static String getResultDataPath(){
+    private static String getResultDataPath() {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         assert requestAttributes != null;
         HttpServletRequest request = requestAttributes.getRequest();
-        return  "https://" + request.getServerName() + ":" + request.getServerPort()+request.getRequestURI();
+        return "https://" + request.getServerName() + ":" + request.getServerPort() + request.getRequestURI();
     }
 }

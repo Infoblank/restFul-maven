@@ -1,7 +1,6 @@
 package com.maccura.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.FileCopyUtils;
 
 import java.io.IOException;
@@ -11,9 +10,9 @@ import java.nio.charset.StandardCharsets;
 /**
  * @author 7097
  */
+@Slf4j
 public class ImageUtil {
 
-    private static final Logger log = LoggerFactory.getLogger(ImageUtil.class);
 
     public static String[] loadImagePath() {
         // Resource resource = new ClassPathResource("static/images/");

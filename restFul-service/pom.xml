@@ -44,7 +44,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${thymeleaf.version}</version>
+                <version>${spring.boot.family.version}</version>
             </plugin>
         </plugins>
     </build>

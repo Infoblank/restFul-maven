@@ -2,6 +2,7 @@ package com.maccura.controller;
 
 import com.maccura.utils.ImageUtil;
 import com.maccura.utils.ResultData;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import java.util.Arrays;
  * @author 7097
  */
 @RestController
+@Slf4j
 @RequestMapping("service/v2")
 public class MainController {
 
@@ -26,7 +28,6 @@ public class MainController {
 
     @GetMapping("return/data")
     public ResultData<String> to3dRotatingAlbum() {
-        int i = 9/0;
         return ResultData.success("\"/page/3DRotatingAlbum\"");
     }
 
