@@ -44,7 +44,10 @@ public enum ReturnCode {
      * 服务异常
      **/
     RC500(500, "系统异常，请稍后重试"),
-
+    /**
+     * 参数验证出错
+     */
+    RC400(400, "参数验证出错,检查参数"),
     INVALID_TOKEN(2001, "访问令牌不合法"),
     ACCESS_DENIED(2003, "没有权限访问该资源"),
     CLIENT_AUTHENTICATION_FAILED(1001, "客户端认证失败"),
