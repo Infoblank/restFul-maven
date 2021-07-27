@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -33,9 +34,15 @@ public class MainController {
 
 
     @GetMapping("getImagesPath.json")
-    public ResultData<ArrayList<String>> getImagesPath(){
+    public ResultData<ArrayList<String>> getImagesPath() {
         String[] imagePath = ImageUtil.loadImagePath();
         ArrayList<String> strings = new ArrayList<>(Arrays.asList(imagePath));
         return ResultData.success(strings);
     }
+
+    @GetMapping("getImagesPath1.json")
+    public ResultData<String> getImagesPath1() throws IOException {
+        return ResultData.success(ImageUtil.images());
+    }
+
 }

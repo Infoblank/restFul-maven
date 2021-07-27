@@ -3,9 +3,12 @@ package com.maccura;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.util.FileCopyUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -41,8 +44,8 @@ public class TestClass {
 
     @Test
     void file() throws IOException {
-      //  File file = new File("src/main/resources/static/images/");
-      //  File file1 = ResourceUtils.getFile("classpath:static/images/");
+        //  File file = new File("src/main/resources/static/images/");
+        //  File file1 = ResourceUtils.getFile("classpath:static/images/");
         /*ClassPathResource classPathResource = new ClassPathResource("static/images/");
         File[] files = classPathResource.getFile().listFiles(pathname -> pathname.getAbsolutePath().endsWith(".png"));
         ArrayList<String> strings = new ArrayList<>();
@@ -65,5 +68,34 @@ public class TestClass {
 
         *//*String str = "src\\main\\resources\\static\\images\\img_1.png";
         System.out.println(str.split("static")[1].replace("\\","/"));*/
+    }
+
+    @Test
+    public void images() throws IOException {
+        String txt = "";
+        String resourceFile = "static/images/";
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        Resource[] resources = resolver.getResources(resourceFile);
+        String scheme = resources[0].getURI().getScheme();
+        Resource resource;
+        if (scheme.equals("jar")) {
+            resource = new ClassPathResource("/BOOT-INF/classes!/" + resourceFile);
+        } else {
+            resource = new ClassPathResource(resourceFile);
+        }
+       // Resource resource = resources[0];
+        //获得文件流，因为在jar文件中，不能直接通过文件资源路径拿到文件，但是可以在jar包中拿到文件流
+        InputStream stream = resource.getInputStream();
+        StringBuilder buffer = new StringBuilder();
+        byte[] bytes = new byte[1024];
+        try {
+            for (int n; (n = stream.read(bytes)) != -1; ) {
+                buffer.append(new String(bytes, 0, n));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        txt = buffer.toString();
+        System.out.println(txt);
     }
 }

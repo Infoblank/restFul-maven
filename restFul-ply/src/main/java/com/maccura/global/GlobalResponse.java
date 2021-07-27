@@ -3,6 +3,7 @@ package com.maccura.global;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maccura.utils.ResultData;
 import lombok.SneakyThrows;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -26,7 +27,7 @@ public class GlobalResponse implements ResponseBodyAdvice<Object> {
     }
 
     @Override
-    public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
+    public boolean supports(@NotNull MethodParameter methodParameter, @NotNull Class<? extends HttpMessageConverter<?>> aClass) {
         return true;
     }
 
@@ -42,9 +43,9 @@ public class GlobalResponse implements ResponseBodyAdvice<Object> {
      */
     @SneakyThrows
     @Override
-    public Object beforeBodyWrite(Object o, MethodParameter methodParameter,
-                                  MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass,
-                                  ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+    public Object beforeBodyWrite(Object o, @NotNull MethodParameter methodParameter,
+                                  @NotNull MediaType mediaType, @NotNull Class<? extends HttpMessageConverter<?>> aClass,
+                                  @NotNull ServerHttpRequest serverHttpRequest, @NotNull ServerHttpResponse serverHttpResponse) {
         if (o instanceof String) {
             return objectMapper.writeValueAsString(o);
         }

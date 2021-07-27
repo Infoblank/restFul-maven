@@ -57,6 +57,7 @@
                     <fork>true</fork>
                     <mainClass>com.maccura.RestFulPlyApplication</mainClass>
                     <layout>JAR</layout>
+                    <finalName>rest-ful</finalName>
                 </configuration>
                 <executions>
                     <execution>
